@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { X } from 'lucide-react';
 
 function RegiesterPage() {
     const [data, setData] = useState({
@@ -26,6 +27,17 @@ function RegiesterPage() {
         setUploadPhoto(file)
     }
 
+    const handleClearUploadPhoto = (e) => {
+        e.stopPropagation()
+        e.preventDefault()
+        setUploadPhoto(null)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        e.stopPropagation()
+    }
+
     console.log('upload photo name', uploadPhoto);
 
     return (
@@ -33,7 +45,7 @@ function RegiesterPage() {
             <div className='bg-white w-full max-w-sm mx-2 rounded overflow-hidden p-4 '>
                 <h3>Welcom to chat app!</h3>
 
-                <form className='grid gap-4 mt-5'>
+                <form className='grid gap-4 mt-5' onSubmit={handleSubmit}>
                     {/* name */}
                     <div className='flex flex-col gap-1'>
                         <label htmlFor='name'>Name :</label>
@@ -84,11 +96,17 @@ function RegiesterPage() {
                         <label htmlFor='profile_pic'>Photo :
 
                             <div className='h-14 bg-slate-200 flex justify-center items-center border hover:border-primary rounded cursor-pointer'>
-                                <p className='text-sm'>
-                                {
-                                    uploadPhoto ? uploadPhoto.name : "Upload profile photo"
-                                }
-                                
+                                <p className='text-sm max-w-[300px] text-ellipsis line-clamp-1 flex '>
+                                    {
+                                        uploadPhoto?.name ? uploadPhoto?.name : "Upload profile photo"
+                                    }
+                                    {
+                                        uploadPhoto?.name &&
+                                        <button onClick={handleClearUploadPhoto} className='text-lg ml-2 hover:text-red-600'>
+                                            <X />
+                                        </button>
+                                    }
+
                                 </p>
                             </div>
 
