@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 function RegiesterPage() {
     const [data, setData] = useState({
@@ -42,7 +43,7 @@ function RegiesterPage() {
 
     return (
         <div className='mt-5'>
-            <div className='bg-white w-full max-w-sm mx-2 rounded overflow-hidden p-4 '>
+            <div className='bg-white w-full max-w-sm mx-2 rounded overflow-hidden p-4 mx-auto'>
                 <h3>Welcom to chat app!</h3>
 
                 <form className='grid gap-4 mt-5' onSubmit={handleSubmit}>
@@ -98,7 +99,7 @@ function RegiesterPage() {
                             <div className='h-14 bg-slate-200 flex justify-center items-center border hover:border-primary rounded cursor-pointer'>
                                 <p className='text-sm max-w-[300px] text-ellipsis line-clamp-1 flex '>
                                     {
-                                        uploadPhoto?.name ? uploadPhoto?.name : "Upload profile photo"
+                                        uploadPhoto?.name ? (uploadPhoto?.name.length > 30 ? `${uploadPhoto?.name.substring(0,30)}...` : uploadPhoto?.name ): "Upload profile photo"
                                     }
                                     {
                                         uploadPhoto?.name &&
@@ -106,7 +107,6 @@ function RegiesterPage() {
                                             <X />
                                         </button>
                                     }
-
                                 </p>
                             </div>
 
@@ -121,7 +121,15 @@ function RegiesterPage() {
                             onChange={handleUploadPhoto}
                         />
                     </div>
+
+                    <button
+                    className=' bg-primary text-lg px-4 py-1 hover:bg-secondary rounded mt-2 font-bold text-white leading-relaxed tracking-wide'
+                    >
+                        Register
+                    </button>
                 </form>
+
+                <p className='my-3 text-center'>Already have account ? <Link to={"/email"} className='hover:text-primary font-semibold'>Login</Link></p>
             </div>
         </div>
     )
