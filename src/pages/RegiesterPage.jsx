@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import uploadFile from '../helpers/uploadFile';
 
 function RegiesterPage() {
     const [data, setData] = useState({
@@ -22,8 +23,11 @@ function RegiesterPage() {
         })
     }
 
-    const handleUploadPhoto = (e) => {
+    const handleUploadPhoto = async(e) => {
         const file = e.target.files[0]
+
+        const upload_photo = await uploadFile(file)
+        console.log("upload_photo", upload_photo)
 
         setUploadPhoto(file)
     }
@@ -43,7 +47,7 @@ function RegiesterPage() {
 
     return (
         <div className='mt-5'>
-            <div className='bg-white w-full max-w-sm mx-2 rounded overflow-hidden p-4 mx-auto'>
+            <div className='bg-white w-full max-w-md mx:2 rounded overflow-hidden p-4 sm:mx-auto'>
                 <h3>Welcom to chat app!</h3>
 
                 <form className='grid gap-4 mt-5' onSubmit={handleSubmit}>
