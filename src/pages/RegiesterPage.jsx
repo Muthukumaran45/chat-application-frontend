@@ -8,7 +8,7 @@ import uploadFile from '../helpers/uploadFile';
 
 // package
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 
 
@@ -20,6 +20,7 @@ function RegiesterPage() {
         profile_pic: "",
     })
     const [uploadPhoto, setUploadPhoto] = useState("")
+    const navigate = useNavigate()
 
     const handleOnChange = (e) => {
         const { name, value } = e.target
@@ -66,6 +67,17 @@ function RegiesterPage() {
             console.log("register data", data)
 
             toast.success(response.data.message)
+            if (response.data.success) {
+                setData({
+                    name: "",
+                    email: "",
+                    password: "",
+                    profile_pic: "",
+                })
+
+                navigate('/email')
+
+            }
         } catch (error) {
             toast.error(error?.response?.data?.message)
             console.log('error', error);
