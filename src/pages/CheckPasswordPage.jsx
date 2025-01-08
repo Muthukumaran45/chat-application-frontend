@@ -74,7 +74,7 @@ function CheckPasswordPage() {
                     {/* <CircleUserRound size={80} absoluteStrokeWidth /> */}
 
                     <Avatar
-                        width={70}
+                        width={60}
                         height={70} 
                         name={'Muthu kumaran'}
                     />
